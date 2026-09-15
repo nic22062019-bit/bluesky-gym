@@ -67,3 +67,21 @@ If you use BlueSky-Gym in your work, please cite it using:
 
 List of publications & preprints using `BlueSky-Gym` (please open a pull request to add missing entries):
 *   _missing entry_
+
+
+---
+## UTM L4 integration (this fork)
+
+### numpy>=2 fix (required)
+bluesky-gym envs (Horizontal/Sector/Merge CR, ...) crash with numpy>=2 in
+`bluesky/traffic/windfield.py` (`float(vnorth)` on 1-D array -> TypeError).
+Apply once per environment:
+```bash
+python scripts/patch_numpy2_bluesky.py
+VENV=/root/bluesky_venv python scripts/patch_numpy2_bluesky.py
+```
+
+### Train an AI dispatcher (L4)
+```bash
+BLUESKY_HEADLESS=1 python scripts/train_l4_dispatcher.py --env HorizontalCREnv-v0 --steps 100000
+```
